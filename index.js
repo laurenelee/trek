@@ -10,10 +10,10 @@ $(document).ready(() => {
 
       response.forEach((trip) => {
         let name = trip.name,
+        id = trip.id,
         continent = trip.continent,
         weeks = trip.weeks;
-        let allTripInfo = `<h3>${name}:</h3> <p> Location: ${continent} Length: ${weeks} weeks. </p>`;
-
+        let allTripInfo = `<h3><a class="title" href=>${name}:</a></h3> <p> Location: ${continent} Length: ${weeks} weeks. </p>`;
         $('#all-trips ul').append(allTripInfo);
       });
     })
@@ -27,5 +27,19 @@ $(document).ready(() => {
     });
   });
 });
-// Should be able to see id, name, destination, continent, about, category, weeks and cost
 // });
+
+// more info on individual trips
+$('#all-trips').on('click', 'a', function(event) {
+  let individualURL = `${BASE_URL}/trips/${this.id}`
+  // `"${$(this).html()}"`
+  // this = trip.name.id
+  // console.log(individualURL);
+  $.get(individualURL, response => {
+    console.log(response.id);
+    $('#all-trips').append(`${response.id} ${response.destination}`);
+    // let id = response.id;
+    // destination, name
+    // $('ul').append(id);
+  });
+});
