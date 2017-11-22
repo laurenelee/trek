@@ -49,12 +49,13 @@ $(document).ready(() => {
         <p>~</p>`);
         tripLi.append('<p class="button"> Reserve Today! </p>');
 
-        tripLi.one('click', 'p', function() {
-          let formInfo = `
-          <form id="add-reservation" action="${individualURL}/reservations">
-          <label for="name">Name:</label><input type="text" name="name"></input> <label for="age">Age:</label><input type="number" name="age"></input> <label for="email">Email:</label><input type="text" name="email"></input>
-          <input type="submit" value="Make Reservation"</input>
-          </form>`;
+        $(this).one('click', 'p', function() {
+          let formInfo = `<form id="add-reservation" action="${individualURL}/reservations">
+          <label for="name">Name:</label><input type="text" name="name"></input>
+          <label for="age">Age:</label><input type="number" name="age"></input>
+          <label for="email">Email:</label><input type="text" name="email"></input>
+          <input type="submit" value="Make Reservation"</input></form>`;
+
 
           tripLi.after(formInfo);
           // figure out how to hide 'reserve today button'
