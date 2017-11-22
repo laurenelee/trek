@@ -52,13 +52,15 @@ $(document).ready(() => {
           $(this).after(formInfo);
           // figure out how to hide 'reserve today button'
         }); // closing the .get
+
+        // defined out in the wild
         const successReservation = function successReservation() {
           $("#message").html('<p> Reservation made! </p>');
           console.log('successfully made reservation!');
         };
 
         // begin .post to generate form and attach it to li
-        $('#all-trips').on('submit','#add-reservation', function(event) {
+        $(this).on('submit','#add-reservation', function(event) {
           event.preventDefault();
 
           let formData = $('#add-reservation').serialize();
@@ -66,7 +68,8 @@ $(document).ready(() => {
           const reservationURL = $('#add-reservation').attr('action');
 
           $.post(reservationURL, formData, successReservation);
-        });
+        }); // closing .post
+
         //     $("#message").html('<p> Reservation made! </p>');
         //   }).fail(reservationFailureCallback);
         // };
@@ -74,13 +77,7 @@ $(document).ready(() => {
         // let reservationFailureCallback = function(response) {
         //   $("#all-trips").empty();
         //   $(".errors").html("<h3>Sorry, that reservation attempt failed!</h3>");
-
-        // would like to toggle back and forth.
-        // $(this).click((event) => {
-        //   event.stopPropagation();
-        // });
-
       });
-      // });
+
     });
   });
