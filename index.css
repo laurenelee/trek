@@ -8,3 +8,6 @@ body {
   color: white;
   font-family: palatino;
 }
+#all-trips {
+  background-color: rgba(230, 204, 218, 0.35);
+}
