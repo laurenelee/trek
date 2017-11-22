@@ -19,7 +19,7 @@ $(document).ready(() => {
     .fail(function(response){
       console.log(response);
       console.log('failure');
-      $('#fail').html(`<p>Error!</p>`)
+      $('#message').html(`<p>Error!</p>`)
     })
     .always(function(){
       console.log('always even if we have success or failure');
@@ -42,13 +42,18 @@ $(document).ready(() => {
         ~`);
         // toggle class, hide , show?
       });
-      ////////////////////////////////////////////////////
-      // reserve a spot on the individual trip
-//  https://trektravel.herokuapp.com/trips/1/reservations
-// POST REQUEST name (string) age (integer) email (string)
-      let reservationURL = `${individualURL}/reservations`;
-      $.post(reservationURL formData, successCallback).fail((response) => {
-        console.log("did not go so hot");
-      });
     });
-  });
+    ////////////////////////////////////////////////////
+
+    // POST REQUEST name (string) age (integer) email (string)
+    let reservationURL = `${individualURL}/reservations`;
+    $.post(reservationURL, formData, function(response){
+      $("#message").html('<p> Reservation made! </p>');
+    }).fail(reservationFailureCallback);
+  };
+
+  let reservationFailureCallback = function(response) {
+    $("#all-trips").empty();
+    $(".errors").html("<h3>Sorry, that reservation attempt failed!</h3>");
+  };
+});
