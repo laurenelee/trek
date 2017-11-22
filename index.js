@@ -34,18 +34,21 @@ $(document).ready(() => {
     $.get(individualURL, response => {
 
       $(this).append(`
-        <section><p>ID: ${response.id}</p>
+        <p>ID: ${response.id}</p>
         <p>Category: ${response.category}</p>
         <p>Destination: ${response.continent} </p>
         <p>About: ${response.about} </p>
-        <p>Cost: $${response.cost}</p></section>
-        ~`).toggleClass("section");
+        <p>Cost: $${response.cost}</p>
+        ~`);
+        // toggle class, hide , show?
+      });
+      ////////////////////////////////////////////////////
+      // reserve a spot on the individual trip
+//  https://trektravel.herokuapp.com/trips/1/reservations
+// POST REQUEST name (string) age (integer) email (string)
+      let reservationURL = `${individualURL}/reservations`;
+      $.post(reservationURL formData, successCallback).fail((response) => {
+        console.log("did not go so hot");
       });
     });
-////////////////////////////////////////////////////
-    // reserve a spot on the individual trip
-    // https://trektravel.herokuapp.com/trips/1/reservations
-    // POST REQUEST name (string) age (integer) email (string)
-
-    // let reservationURL = `${individualURL}/reservations`
   });
