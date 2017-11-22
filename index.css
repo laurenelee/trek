@@ -3,3 +3,8 @@ section {
   opacity: 0;
   transition: visibility 0s linear 300ms, opacity 300ms;
 }
+body {
+  background-image: url("https://images.unsplash.com/photo-1503221043305-f7498f8b7888?auto=format&fit=crop&w=1635&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
+  color: white;
+  font-family: palatino;
+}
