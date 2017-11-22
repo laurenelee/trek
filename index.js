@@ -29,7 +29,7 @@ $(document).ready(() => {
   // begin .get to see more info on individual trips
   $('#all-trips').on('click', 'li', function() {
     let tripID = $(this).attr('data-id');
-    let individualURL = `${BASE_URL}/trips/${tripID}`
+    let individualURL = `${BASE_URL}/trips/${tripID}`;
 
     $.get(individualURL, response => {
 
@@ -41,13 +41,14 @@ $(document).ready(() => {
         <p>Cost: $${response.cost}</p>
         <p>~</p>`);
         $(this).append('<p class="button"> Reserve Today! </p>');
+        // $(this).append('<p class="button"> Close </p>');
 
         $(this).click((event) => {
           event.stopPropagation();
         }); // stopping click from running too many times
 
         $(this).one('click', 'p', function() {
-          let formInfo = `<form id="add-reservation" action="${individualURL}/reservations">
+          let formInfo = `<form class="add-reservation" action="${individualURL}/reservations">
           <label for="name">Name:</label><input type="text" name="name"></input>
           <label for="age">Age:</label><input type="number" name="age"></input>
           <label for="email">Email:</label><input type="text" name="email"></input>
@@ -55,26 +56,30 @@ $(document).ready(() => {
 
           $(this).after(formInfo).hide();
 
-        }); // closing the .get
+        });
 
         // defined out in the wild
-        const successReservation = function successReservation() {
-          $("#message").html('<p> Reservation made! </p>');
-          console.log('successfully made reservation!');
-        };
+
 
         // begin .post to generate form and attach it to li
-        $(this).on('submit','#add-reservation', function(event) {
+        $(this).on('submit','.add-reservation', function(event) {
           event.preventDefault();
 
-          let formData = $('#add-reservation').serialize();
 
-          const reservationURL = $('#add-reservation').attr('action');
+          let formData = $(this).serialize();
 
+          const reservationURL = $(this).attr('action');
+          console.log(reservationURL);
+          const successReservation = function successReservation() {
+            $("#message").html('<p> Reservation made! </p>');
+            console.log('successfully made reservation!');
+          };
           $.post(reservationURL, formData, successReservation);
-          $('#add-reservation').hide();
+          $(this).html("resevered!");
 
-          window.location.reload();
+          // window.location.reload();
+          // want something like a flash message or alert
+
           // $('#message').append('<p>Your reservation is complete!</p>');
           // $(this).after(formData).hide();
         }); // closing .post
