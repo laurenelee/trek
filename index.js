@@ -49,8 +49,23 @@ $(document).ready(() => {
 
       // POST REQUEST name (string) age (integer) email (string)
 
-      //   let reservationURL = `${individualURL}/reservations`;
-      //   $.post(reservationURL, formData, function(response){
+      let reservationURL = `${individualURL}/reservations`;
+
+      // need to generate form and attach it to li
+      $('li p:last-of-type').append('<form id="add-reservation"></form>');
+
+      let formInfo = '<label for="name">Name:</label><input type="text" name="name"></input> <label for="age">Age:</label><input type="number" name="age"></input> <label for="email">Email:</label><input type="text" name="email"></input>';
+      let submitButton = '<div class="button"> <button type="submit" >Make Reservation</button></div>';
+
+      $('form').append(formInfo + submitButton);
+      let formData = $('#add-reservation').serialize();
+
+      const successReservation = function successReservation() {
+        $("#message").html('<p> Reservation made! </p>');
+        console.log('successfully made reservation!');
+      };
+
+      $.post(reservationURL, formData, successReservation);
       //     $("#message").html('<p> Reservation made! </p>');
       //   }).fail(reservationFailureCallback);
       // };

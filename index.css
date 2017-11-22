@@ -5,9 +5,19 @@ section {
 }
 body {
   background-image: url("https://images.unsplash.com/photo-1503221043305-f7498f8b7888?auto=format&fit=crop&w=1635&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
+  /*background-size: cover;*/
+  /*height: 100vh;*/
+  /*text-align: center;
+  display: flex;*/
+  align-items: center;
+  justify-content: center;
   color: white;
   font-family: palatino;
 }
 #all-trips {
   background-color: rgba(230, 204, 218, 0.35);
+  /*width: 90%;
+  margin: 0 auto;
+  max-width: 900px;
+  padding-bottom: 100px;*/
 }
