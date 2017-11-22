@@ -5,7 +5,6 @@ $(document).ready(() => {
 
     let fullUrl = BASE_URL + '/trips'
     $.get(fullUrl, response => {
-      // console.log('success!');
       console.log(response);
 
       response.forEach((trip) => {
@@ -13,7 +12,7 @@ $(document).ready(() => {
         id = trip.id,
         continent = trip.continent,
         weeks = trip.weeks;
-        let allTripInfo = `<h3><a class="title" href=>${name}:</a></h3> <p> Location: ${continent} Length: ${weeks} weeks. </p>`;
+        let allTripInfo = `<li data-id=${id}><h3>${name}:</h3> <p> Location: ${continent} Length: ${weeks} weeks. </p></li>`;
         $('#all-trips ul').append(allTripInfo);
       });
     })
@@ -26,20 +25,27 @@ $(document).ready(() => {
       console.log('always even if we have success or failure');
     });
   });
-});
-// });
 
-// more info on individual trips
-$('#all-trips').on('click', 'a', function(event) {
-  let individualURL = `${BASE_URL}/trips/${this.id}`
-  // `"${$(this).html()}"`
-  // this = trip.name.id
-  // console.log(individualURL);
-  $.get(individualURL, response => {
-    console.log(response.id);
-    $('#all-trips').append(`${response.id} ${response.destination}`);
-    // let id = response.id;
-    // destination, name
-    // $('ul').append(id);
+  // more info on individual trips
+  $('#all-trips').on('click', 'li', function() {
+    let tripID = $(this).attr('data-id');
+    let individualURL = `${BASE_URL}/trips/${tripID}`
+
+    $.get(individualURL, response => {
+
+      $(this).append(`
+        <section><p>ID: ${response.id}</p>
+        <p>Category: ${response.category}</p>
+        <p>Destination: ${response.continent} </p>
+        <p>About: ${response.about} </p>
+        <p>Cost: $${response.cost}</p></section>
+        ~`).toggleClass("section");
+      });
+    });
+////////////////////////////////////////////////////
+    // reserve a spot on the individual trip
+    // https://trektravel.herokuapp.com/trips/1/reservations
+    // POST REQUEST name (string) age (integer) email (string)
+
+    // let reservationURL = `${individualURL}/reservations`
   });
-});
