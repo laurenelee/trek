@@ -53,8 +53,8 @@ $(document).ready(() => {
           <label for="email">Email:</label><input type="text" name="email"></input>
           <input type="submit" value="Make Reservation"</input></form>`;
 
-          $(this).after(formInfo);
-          // figure out how to hide 'reserve today button'
+          $(this).after(formInfo).hide();
+
         }); // closing the .get
 
         // defined out in the wild
@@ -72,15 +72,12 @@ $(document).ready(() => {
           const reservationURL = $('#add-reservation').attr('action');
 
           $.post(reservationURL, formData, successReservation);
-        }); // closing .post
+          $('#add-reservation').hide();
 
-        //     $("#message").html('<p> Reservation made! </p>');
-        //   }).fail(reservationFailureCallback);
-        // };
-        //
-        // let reservationFailureCallback = function(response) {
-        //   $("#all-trips").empty();
-        //   $(".errors").html("<h3>Sorry, that reservation attempt failed!</h3>");
+          window.location.reload();
+          // $('#message').append('<p>Your reservation is complete!</p>');
+          // $(this).after(formData).hide();
+        }); // closing .post
       });
 
     });
