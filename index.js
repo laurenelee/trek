@@ -40,20 +40,23 @@ $(document).ready(() => {
         <p>About: ${response.about} </p>
         <p>Cost: $${response.cost}</p>
         ~`);
-        // toggle class, hide , show?
+        // stop from printing too many times... but would like to toggle back and forth.
+        $(this).click((event) => {
+          event.stopPropagation();
+        });
       });
+      ////////////////////////////////////////////////////
+
+      // POST REQUEST name (string) age (integer) email (string)
+
+      //   let reservationURL = `${individualURL}/reservations`;
+      //   $.post(reservationURL, formData, function(response){
+      //     $("#message").html('<p> Reservation made! </p>');
+      //   }).fail(reservationFailureCallback);
+      // };
+      //
+      // let reservationFailureCallback = function(response) {
+      //   $("#all-trips").empty();
+      //   $(".errors").html("<h3>Sorry, that reservation attempt failed!</h3>");
     });
-    ////////////////////////////////////////////////////
-
-    // POST REQUEST name (string) age (integer) email (string)
-    let reservationURL = `${individualURL}/reservations`;
-    $.post(reservationURL, formData, function(response){
-      $("#message").html('<p> Reservation made! </p>');
-    }).fail(reservationFailureCallback);
-  };
-
-  let reservationFailureCallback = function(response) {
-    $("#all-trips").empty();
-    $(".errors").html("<h3>Sorry, that reservation attempt failed!</h3>");
-  };
-});
+  });
