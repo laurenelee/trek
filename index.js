@@ -47,7 +47,11 @@ $(document).ready(() => {
         }); // stopping click from running too many times
 
         $(this).one('click', 'p', function() {
-          let formInfo = `<form id="add-reservation" action="${individualURL}/reservations"><label for="name">Name:</label><input type="text" name="name"></input> <label for="age">Age:</label><input type="number" name="age"></input> <label for="email">Email:</label><input type="text" name="email"></input></form><div class="button"> <button type="submit">Make Reservation</button></div></form>`;
+          let formInfo = `<form id="add-reservation" action="${individualURL}/reservations">
+          <label for="name">Name:</label><input type="text" name="name"></input>
+          <label for="age">Age:</label><input type="number" name="age"></input>
+          <label for="email">Email:</label><input type="text" name="email"></input>
+          <input type="submit" value="Make Reservation"</input></form>`;
 
           $(this).after(formInfo);
           // figure out how to hide 'reserve today button'
