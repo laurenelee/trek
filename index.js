@@ -1,17 +1,15 @@
-const BASE_URL = 'https://trektravel.herokuapp.com';
+const BASE_URL = 'https://trektravel.herokuapp.com/trips';
 $(document).ready(() => {
 
   $('#load').click(function(response) {
-
-    let fullUrl = BASE_URL + '/trips'
-    $.get(fullUrl, response => {
+    $.get(BASE_URL, response => {
       console.log(response);
 
       response.forEach((trip) => {
         let name = trip.name,
-        id = trip.id,
-        continent = trip.continent,
-        weeks = trip.weeks;
+            id = trip.id,
+            continent = trip.continent,
+            weeks = trip.weeks;
         let allTripInfo = `<li data-id=${id}><h3>${name}:</h3> <p> Location: ${continent} Length: ${weeks} weeks. </p></li>`;
         $('#all-trips ul').append(allTripInfo);
       });
@@ -19,7 +17,7 @@ $(document).ready(() => {
     .fail(function(response){
       console.log(response);
       console.log('failure');
-      $('#message').html(`<p>Error!</p>`)
+      $('#message').html(`<p>Error loading all of the trips!</p>`)
     })
     .always(function(){
       console.log('always even if we have success or failure');
@@ -29,7 +27,7 @@ $(document).ready(() => {
   // begin .get to see more info on individual trips
   $('#all-trips').on('click', 'li', function() {
     let tripID = $(this).attr('data-id');
-    let individualURL = `${BASE_URL}/trips/${tripID}`;
+    let individualURL = `${BASE_URL}/${tripID}`;
 
     $.get(individualURL, response => {
 
@@ -41,7 +39,6 @@ $(document).ready(() => {
         <p>Cost: $${response.cost}</p>
         <p>~</p>`);
         $(this).append('<p class="button"> Reserve Today! </p>');
-        // $(this).append('<p class="button"> Close </p>');
 
         $(this).click((event) => {
           event.stopPropagation();
@@ -58,9 +55,6 @@ $(document).ready(() => {
 
         });
 
-        // defined out in the wild
-
-
         // begin .post to generate form and attach it to li
         $(this).on('submit','.add-reservation', function(event) {
           event.preventDefault();
@@ -69,18 +63,19 @@ $(document).ready(() => {
           let formData = $(this).serialize();
 
           const reservationURL = $(this).attr('action');
-          console.log(reservationURL);
-          const successReservation = function successReservation() {
-            $("#message").html('<h3> Reservation made! </h3> <p>Click below to see more trips! </p>');
-            console.log('successfully made reservation!');
+
+          const reservationResponse = function reservationResponse(status) {
+            $("#message").html(`<h3> ${status} </h3>`);
+            console.log('${status}');
           };
-          $.post(reservationURL, formData, successReservation);
-          $(this).html("resevered!");
+
+          $.post(reservationURL, formData, reservationResponse('Reservation Made!')).fail(reservationResponse('Reservation failed!'));
+          // $(this).html("resevered!");
 
 
           // $(this).hide(); this would hide the html
           // $('.add-reservation').hide(); same as above
-          $('li').hide(); // or maybe li?
+          $('li').hide();
 
           // window.location.reload();
           // want something like a flash message or alert
