@@ -71,11 +71,16 @@ $(document).ready(() => {
           const reservationURL = $(this).attr('action');
           console.log(reservationURL);
           const successReservation = function successReservation() {
-            $("#message").html('<p> Reservation made! </p>');
+            $("#message").html('<h3> Reservation made! </h3> <p>Click below to see more trips! </p>');
             console.log('successfully made reservation!');
           };
           $.post(reservationURL, formData, successReservation);
           $(this).html("resevered!");
+
+
+          // $(this).hide(); this would hide the html
+          // $('.add-reservation').hide(); same as above
+          $('li').hide(); // or maybe li?
 
           // window.location.reload();
           // want something like a flash message or alert
@@ -83,6 +88,14 @@ $(document).ready(() => {
           // $('#message').append('<p>Your reservation is complete!</p>');
           // $(this).after(formData).hide();
         }); // closing .post
+
+        // .fail(function(response){
+        //   console.log(response);
+        //   $('#fail').html('<p>Request was unsuccessful</p>')
+        // })
+        // .always(function(){
+        //   console.log('always even if we have success or failure');
+        // });
       });
 
     });
