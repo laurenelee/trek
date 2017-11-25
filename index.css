@@ -38,3 +38,14 @@ label {
 h3, h2 {
   font-family: palatino;
 }
+.disappear{
+  height: 0;
+  display: none;
+}
+#message {
+  text-align: center;
+  padding-top: 20px;
+}
+.bold {
+  font-weight: bold;
+}
