@@ -1,14 +1,5 @@
-section {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s linear 300ms, opacity 300ms;
-}
 body {
   background-image: url("https://images.unsplash.com/photo-1503221043305-f7498f8b7888?auto=format&fit=crop&w=1635&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
-  /*background-size: cover;*/
-  /*height: 100vh;*/
-  /*text-align: center;
-  display: flex;*/
   align-items: center;
   justify-content: center;
   color: white;
@@ -37,10 +28,6 @@ label {
 }
 h3, h2 {
   font-family: palatino;
-}
-.disappear{
-  height: 0;
-  display: none;
 }
 #message {
   text-align: center;

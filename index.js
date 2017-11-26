@@ -42,24 +42,17 @@ $(document).ready(() => {
       <p>~</p></div>`);
       $(this).append('<div class="toggle"><p class="button"> Reserve Today! </p></div>');
 
-      // $(this).toggleClass('disappear');
-
-      //trying to toggle back and forth click to see details of trip
-
       $(this).click((event) => {
         event.stopPropagation();
       }); // stopping click from running too many times
-      // $(this).toggleClass('disappear');
 
-      $(this).one('click', 'p', function() {
+      $(this).on('click', 'p', function() {
         let formInfo = `<form class="add-reservation" action="${individualURL}/reservations">
         <label for="name">Name:</label><input type="text" name="name"></input>
         <label for="age">Age:</label><input type="number" name="age"></input>
         <label for="email">Email:</label><input type="text" name="email"></input>
         <input type="submit" value="Make Reservation"</input></form>`;
-
         $(this).after(formInfo).hide();
-
       });
 
       $('#all-trips').on('click', 'li', function() {
@@ -69,17 +62,12 @@ $(document).ready(() => {
       // begin .post to generate form and attach it to li
       $(this).on('submit','.add-reservation', function(event) {
         event.preventDefault();
-
-
         let formData = $(this).serialize();
-
         const reservationURL = $(this).attr('action');
-
         const reservationResponse = function reservationResponse(status) {
           $("#message").html(`<h3> ${status} </h3>`);
         };
         const positive = 'Resevation Made!';
-        // const negative = 'Reservation Failed';
 
         $.post(reservationURL, formData, reservationResponse(positive))
         .fail(function(){
@@ -88,13 +76,10 @@ $(document).ready(() => {
         })
         .always(function(){
           console.log('always even if we have success or failure');
-
         });
         $('li').hide();
         $('#load').show();
-
       }); // closing .post
     });
-
   });
 });
